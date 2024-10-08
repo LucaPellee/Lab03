@@ -11,7 +11,11 @@ while(True):
     if int(txtIn) == 1:
         print("Inserisci la tua frase in Italiano\n")
         txtIn = input()
-        sc.handleSentence(txtIn,"italian")
+        lista = sc.handleSentence(txtIn,"italian")
+        if len(lista) >0:
+            print(lista)
+        else:
+            print("Parole tutte corrette")
         continue
 
     if int(txtIn) == 2:

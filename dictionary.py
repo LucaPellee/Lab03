@@ -1,12 +1,21 @@
 class Dictionary:
-    def __init__(self):
-        pass
+    def __init__(self, dict = [], language= ""):
+        self._dict = dict
+        self._language = language
 
     def loadDictionary(self,path):
-        pass
+        path_file = path
+        with open(path_file, 'r', encoding="utf-8") as file:
+            for line in file:
+                value = line.strip()
+                self._dict.append(value.lower())
 
     def printAll(self):
-        pass
+        for value in self._dict:
+            print(f"{value}\n")
+
+    def __contains__(self, word):
+        return word in self._dict
 
 
     @property
