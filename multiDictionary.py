@@ -41,4 +41,75 @@ class MultiDictionary:
                     parole_err.append(parola)
         return parole_err
 
+    def searchWordLinear(self, words,language):
+        parole_err = []
+        for w in words:
+            found = False
+            parola = rw.RichWord(w)
+            if language == "italian":
+                for p in self._italian.dict:
+                    if p == w:
+                        parola.corretta = True
+                        found = True
+                if found == False:
+                    parole_err.append(parola)
+            if language == "english":
+                for p in self._english.dict:
+                    if p == w:
+                        parola.corretta = True
+                        found = True
+                if found == False:
+                    parole_err.append(parola)
+            if language == "spanish":
+                for p in self._spanish.dict:
+                    if p == w:
+                        parola.corretta = True
+                        found = True
+                if found == False:
+                    parole_err.append(parola)
+        return parole_err
+
+    def searchWordDichotomic(self, words, language):
+        parole_err = []
+        for w in words:
+            found = False
+            parola = rw.RichWord(w)
+            if language == "italian":
+                currentDict = self._italian.dict
+                found = self.dichotomic(currentDict, w)
+                if found == True:
+                    parola.corretta = True
+                else:
+                    parole_err.append(parola)
+
+            if language == "english":
+                currentDict = self._english.dict
+                found = self.dichotomic(currentDict, w)
+                if found == True:
+                    parola.corretta = True
+                else:
+                    parole_err.append(parola)
+
+            if language == "spanish":
+                currentDict = self._spanish.dict
+                found = self.dichotomic(currentDict, w)
+                if found == True:
+                    parola.corretta = True
+                else:
+                    parole_err.append(parola)
+        return parole_err
+
+
+    def dichotomic(self, currentDict, word):
+        start = 0
+        end = len(currentDict)
+        while (start != end):
+            mean = start + int((end - start) / 2)
+            if word == currentDict[mean]:
+                return True
+            elif word > currentDict[mean]:
+                start = mean + 1
+            else:
+                end = mean
+        return False
 

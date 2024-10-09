@@ -1,4 +1,4 @@
-import time
+
 
 import multiDictionary as md
 
@@ -12,6 +12,17 @@ class SpellChecker:
         words = txtIn.split()
 
         return self._multiDict.searchWord(words, language)
+
+    def handleSentenceLinear(self, txtIn, language):
+        txtIn = replaceChars(txtIn.lower())
+        words = txtIn.split()
+        return self._multiDict.searchWordLinear(words, language)
+
+    def handleSentenceDichotomic(self, txtIn, language):
+        txtIn = replaceChars(txtIn.lower())
+        words = txtIn.split()
+        return self._multiDict.searchWordDichotomic(words, language)
+
 
     def printMenu(self):
         print("______________________________\n" +
